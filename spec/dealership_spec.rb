@@ -68,5 +68,4 @@ describe(Dealership) do
         expect(test_dealership.cars()).to(eq([test_vehicle]))
       end
     end
-
 end

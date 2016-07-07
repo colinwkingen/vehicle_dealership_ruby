@@ -1,7 +1,38 @@
 class Vehicle
-  def initialize (make,model,year)
-    @make = make
-    @year = year
+  @@vehicles = []
+  attr_reader(:make, :model, :year, :color, :engine_size, :number_of_doors)
+  def initialize (attributes)
+    @make = attributes.fetch(:make)
+    @year = attributes.fetch(:year)
+    @model = attributes.fetch(:model)
+    @color = attributes.fetch(:color)
+    @engine_size= attributes.fetch(:engine_size)
+    @number_of_doors = attributes.fetch(:number_of_doors)
+    @id = @@vehicles.length().+(1)
+  end
+  define_method(:make) do
+    @make
+  end
+  define_method(:model) do
+    @model
+  end
+  define_method(:year) do
+    @year
+  end
+  define_method(:id) do
+    @id
+  end
+
+  define_singleton_method(:all) do
+    @@vehicles
+  end
+
+  define_method(:save) do
+    @@vehicles.push(self)
+  end
+
+  define_singleton_method(:clear) do
+    @@vehicles = []
   end
 
   define_method(:age) do
@@ -11,8 +42,15 @@ class Vehicle
 
   define_method(:worth_buying?) do
     american_cars = ["Chrysler","Ford",'GM']
-    american = american_cars.include?(@make)
-    new_enough = age().<=(15)
-    american.&(new_enough)
+    american_cars.include?(@make).&(self.age().<=(15))
+  end
+  define_singleton_method(:find) do |identification|
+    found_vehicle = nil
+    @@vehicles.each() do |vehicle|
+      if vehicle.id().eql?(identification.to_i())
+        found_vehicle = vehicle
+      end
+    end
+    found_vehicle
   end
 end
