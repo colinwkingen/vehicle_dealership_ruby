@@ -4,7 +4,7 @@ describe('Vehicle') do
   before() do
     Vehicle.clear()
   end
-  helpful_hash = {:make => "Toyota", :model => "Prius", :year => "2000", :color => "blue", :engine_size => "4L", :number_of_doors => "4"}
+  @@helpful_hash = helpful_hash
 
   describe("#make") do
     it("returns the make of the vehicle") do

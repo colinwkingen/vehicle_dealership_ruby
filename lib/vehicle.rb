@@ -1,5 +1,6 @@
 class Vehicle
   @@vehicles = []
+  @@helpful_hash = {:make => "Toyota", :model => "Prius", :year => "2000", :color => "blue", :engine_size => "4L", :number_of_doors => "4"}
   attr_reader(:make, :model, :year, :color, :engine_size, :number_of_doors, :id)
   define_method(:initialize) do |attributes|
     @make = attributes.fetch(:make)
